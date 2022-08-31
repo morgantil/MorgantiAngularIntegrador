@@ -34,6 +34,7 @@ export class ProfesoresComponent implements OnInit {
 
   crearFormulario(){
     this.formProfesor = this.fb.group({
+      id  : ['' ],
       nombre  : ['', [ Validators.required, Validators.minLength(5) ]  ],
       apellido  : ['', [ Validators.required, Validators.minLength(5) ]  ],
       dni  : ['', [ Validators.required,Validators.maxLength(8),Validators.pattern("^[0-9]*$")]],
