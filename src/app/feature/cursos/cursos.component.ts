@@ -35,6 +35,7 @@ export class CursosComponent implements OnInit {
 
   crearFormulario(){
     this.formCurso = this.fb.group({
+      id  : ['' ],
       nombre  : ['', [ Validators.required, Validators.minLength(5) ]  ],
       cantHoras  : ['', [ Validators.required, Validators.minLength(1) ]  ],
       alumnos  : ['', [ Validators.required,Validators.maxLength(3),]],
