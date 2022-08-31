@@ -1,0 +1,4 @@
+  [
+    { "nombre": "Profesora1", "apellido": "ApellidoProfesor1", "dni": 38047578, "curso":"Angular"},
+    { "nombre": "Profesora2", "apellido": "ApellidoProfesor2", "dni": 38047577, "curso":"React"}
+  ]

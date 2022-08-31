@@ -1,0 +1,24 @@
+<div *ngIf="mostrarLogin" id="login-form-wrap">
+    <h2>Login</h2>
+    <form id="login-form" [formGroup]="formLogin">
+      <p>
+      <input matInput type="text"  placeholder="Username"  formControlName="user"  [class.is-invalid]="userNoValido" >
+      <small *ngIf="userNoValido" class="text-danger">Ingrese un User valido </small>
+      </p>
+      <p>
+      <input matInput type="email"  placeholder="Password"  formControlName="pass"  [class.is-invalid]="passNoValido">
+      <small *ngIf="passNoValido" class="text-danger">Ingrese un Pass valido </small>
+      </p>
+      <p>
+      <button (click)="enviar()"  class="enviar" type="submit" id="login" value="Login">login</button>
+      </p>
+      <small *ngIf="credencialesValidas" class="text-danger">Ingrese un Pass valido </small>
+    </form>
+    <div id="create-account-wrap">
+      <p class="credenciales">Admin: admin-admin User:  user-user<p>
+      </div>
+  </div>
+
+  <div  *ngIf="!mostrarLogin">
+    <img class="fondo1" src="../../../assets/fondo1.jpg" alt="">
+  </div>

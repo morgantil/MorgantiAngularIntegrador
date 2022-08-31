@@ -1,0 +1,4 @@
+  [
+    { "nombre": "Leonardo", "apellido": "Morganti", "dni": 38047578, "email":"leonardo@hotmail.com", "nota":10},
+    { "nombre": "Matias", "apellido": "Narvaja" ,   "dni": 38047577, "email":"leonardo@hotmail.com", "nota":10}
+  ]

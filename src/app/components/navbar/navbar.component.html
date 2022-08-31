@@ -1,0 +1,18 @@
+<p>
+    <mat-toolbar color="primary">
+      <span  [routerLink]="['/']">Leonardo Morganti</span>
+      <span class="example-spacer"></span>
+      <button [ngClass]="rol == '' ? 'no-mostrar' : 'mostrar'" mat-icon-button class="example-icon favorite-icon m-5" aria-label="Example icon-button with heart icon" [routerLink]="['/alumnos']">
+        Alumnos
+      </button>
+      <button [ngClass]="rol == '' ? 'no-mostrar' : 'mostrar'" mat-icon-button class="example-icon  m-5" aria-label="Example icon-button with share icon" [routerLink]="['/profesores']">
+       Profesores
+      </button>
+      <button [ngClass]="rol == '' ? 'no-mostrar' : 'mostrar'" mat-icon-button class="example-icon  m-5" aria-label="Example icon-button with share icon" [routerLink]="['/cursos']">
+        Cursos
+       </button>
+       <button [ngClass]="rol == '' ? 'no-mostrar' : 'mostrar'" mat-icon-button class="example-icon  m-5" aria-label="Example icon-button with share icon" (click)="limpiar()">
+        Desloguear
+       </button>
+    </mat-toolbar>
+  </p>

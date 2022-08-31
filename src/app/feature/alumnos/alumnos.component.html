@@ -1,0 +1,123 @@
+
+<div *ngIf="isAdmin" class="container-fluid">
+    <div class="row">
+    <div class="col-12">
+    <form [formGroup]="formEstudiante">
+    <div>
+    
+    <mat-label class="label">Nombre</mat-label>
+    <input class="form-control" matInput placeholder="Ingrese un Nombre"  formControlName="nombre"  [class.is-invalid]="nombreNoValido" >
+    <small *ngIf="nombreNoValido" class="text-danger">Ingrese un nombre valido </small>
+    
+    </div>
+    
+    <div>
+    <mat-label class="label">Apellido</mat-label>
+    <input class="form-control" matInput placeholder="Ingrese un Apellido" formControlName ='apellido' [class.is-invalid]="apellidoNoValido">
+    <small *ngIf="apellidoNoValido" class="text-danger">Ingrese un apellido valido </small>
+    </div>
+    
+    <div>
+    <mat-label class="label">Dni</mat-label>
+    <input class="form-control" matInput placeholder="Ingrese un Dni" formControlName="dni" [class.is-invalid]="dniNoValido" >
+    <small *ngIf="dniNoValido" class="text-danger">Ingrese un dni Valido </small>
+    
+    </div>
+    
+    <div>
+    <mat-label class="label">Email</mat-label>
+    <input class="form-control" matInput placeholder="Ingrese un email valido" formControlName="email" [class.is-invalid]="emailNoValido">
+    <small *ngIf="emailNoValido" class="text-danger">Ingrese un dni Valido </small>
+    
+    </div>
+    
+    <div>
+    <mat-label class="label">Nota</mat-label>
+    <input class="form-control" matInput placeholder="Ingrese una nota valido" formControlName="nota" [class.is-invalid]="notaNoValido">
+    <small *ngIf="notaNoValido" class="text-danger">Ingrese un dni Valido </small>
+    
+    </div>
+    
+    <div>
+    <div class="botones">
+    <button (click)="agregarAlumno()" mat-raised-button color="primary" [disabled]="formEstudiante.invalid" >Enviar</button>
+    </div>
+    </div>
+    </form>
+    </div>
+    
+    </div>
+    
+    </div>
+    
+    
+    <div class="row">
+        <div class="col-12">
+        
+        
+            <table mat-table [dataSource]="listaAlumnos" class="mat-elevation-z8">
+        
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+              
+                <!-- Nombre Column -->
+                <ng-container matColumnDef="nombre">
+                  <th mat-header-cell *matHeaderCellDef> Nombre</th>
+                  <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                </ng-container>
+              
+                <!-- Apellido Column -->
+                <ng-container matColumnDef="apellido">
+                  <th mat-header-cell *matHeaderCellDef> Apellido </th>
+                  <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+                </ng-container>
+              
+                <!-- Apellido Column -->
+                <ng-container matColumnDef="dni">
+                  <th mat-header-cell *matHeaderCellDef> Dni </th>
+                  <td mat-cell *matCellDef="let element"> {{element.dni}} </td>
+                </ng-container>
+              
+                <!-- Email Column -->
+                <ng-container matColumnDef="email">
+                  <th mat-header-cell *matHeaderCellDef> Email </th>
+                  <td mat-cell *matCellDef="let element"> {{element.email |  uppercase}} </td>
+                </ng-container>
+        
+                 <!-- Nota Column -->
+                 <ng-container matColumnDef="nota">
+                    <th mat-header-cell *matHeaderCellDef> Nota </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nota | number : '1.2-2'}} </td>
+                  </ng-container>
+                 
+                   <!-- Accion Column -->  
+                 <ng-container matColumnDef="eliminar">
+                    <th mat-header-cell *matHeaderCellDef > Eliminar </th>
+                    <td  mat-cell *matCellDef="let element"><button *ngIf="isAdmin" (click)="eliminarAlumno(element)"><span  class="material-symbols-outlined">delete</span>  </button></td>
+                  </ng-container>
+    
+                    <!-- Accion Column --> 
+                 <ng-container matColumnDef="editar">
+                  <th mat-header-cell *matHeaderCellDef > Editar </th>
+                  <td  mat-cell *matCellDef="let element"> <button *ngIf="isAdmin" (click)="editarAlumno(element)"  class="material-symbols-outlined">edit</button>
+                    </td>
+                </ng-container>
+                 
+            
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+           
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        </div>
+        </div>
+        

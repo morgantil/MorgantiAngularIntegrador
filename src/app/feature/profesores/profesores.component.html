@@ -1,0 +1,133 @@
+<div *ngIf="isAdmin" class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <form [formGroup]="formProfesor" >
+<!-- INICIO NOMBRE-->
+            <div class="row g-3 align-items-center m-1">
+                <div class="col-auto">
+                  <label  class="col-form-label">Nombre</label>
+                </div>
+                <div class="col-auto">
+                  <input  class="form-control" formControlName="nombre" [class.is-invalid]="nombreNoValido">
+                </div>
+                <div class="col-auto">
+                  <span *ngIf="nombreNoValido" id="passwordHelpInline" class="form-text text-danger">
+                    El nombre ingresado es invalido
+                  </span>
+                </div>
+              </div>
+             
+
+<!-- FIN NOMBRE-->
+
+<!-- INICIO APELLIDO-->
+<div class="row g-3 align-items-center m-1">
+    <div class="col-auto">
+      <label  class="col-form-label">Apellido</label>
+    </div>
+    <div class="col-auto">
+      <input  class="form-control" formControlName="apellido" [class.is-invalid]="apellidoNoValido">
+    </div>
+    <div class="col-auto">
+      <span *ngIf="apellidoNoValido"  id="passwordHelpInline" class="form-text text-danger">
+        El nombre Apellido es invalido 
+      </span>
+    </div>
+  </div>
+
+  <!-- INICIO DNI-->
+<div class="row g-3 align-items-center m-1">
+    <div class="col-auto">
+      <label  class="col-form-label">Nro. Dni</label>
+    </div>
+    <div class="col-auto">
+      <input  class="form-control" formControlName="dni" [class.is-invalid]="dniNoValido">
+    </div>
+    <div class="col-auto">
+      <span *ngIf="dniNoValido"  id="passwordHelpInline" class="form-text text-danger">
+        El nombre dni es invalido 
+      </span>
+    </div>
+  </div>
+
+<!-- FIN DNI-->
+
+ <!-- INICIO CURSO-->
+ <div class="row g-3 align-items-center m-1">
+    <div class="col-auto">
+      <label  class="col-form-label">Curso.....</label>
+    </div>
+    <div class="col-auto">
+      <input  class="form-control" formControlName="curso" [class.is-invalid]="cursoNoValido">
+    </div>
+    <div class="col-auto">
+      <span *ngIf="cursoNoValido"  id="passwordHelpInline" class="form-text text-danger">
+        El nombre dni es invalido 
+      </span>
+      <button class="btn btn-dark m-2" (click)="agregarProfesor()"  [disabled]="formProfesor.invalid">Enviar</button>
+    </div>
+  </div>
+</form>
+</div>
+<!-- FIN CURSO-->
+
+
+
+
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <table mat-table [dataSource]="listaProfesores" class="mat-elevation-z8">
+        
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+              
+                <!-- Nombre Column -->
+                <ng-container matColumnDef="nombre">
+                  <th mat-header-cell *matHeaderCellDef> Nombre</th>
+                  <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                </ng-container>
+              
+                <!-- Apellido Column -->
+                <ng-container matColumnDef="apellido">
+                  <th mat-header-cell *matHeaderCellDef> Apellido </th>
+                  <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+                </ng-container>
+              
+                <!-- Dni Column -->
+                <ng-container matColumnDef="dni">
+                  <th mat-header-cell *matHeaderCellDef> Dni </th>
+                  <td mat-cell *matCellDef="let element"> {{element.dni}} </td>
+                </ng-container>
+              
+                <!-- Curso Column -->
+                <ng-container matColumnDef="curso">
+                  <th mat-header-cell *matHeaderCellDef> Curso </th>
+                  <td mat-cell *matCellDef="let element"> {{element.curso |  uppercase}} </td>
+                </ng-container>
+        
+                   <!-- Accion Column -->  
+                 <ng-container matColumnDef="eliminar">
+                    <th mat-header-cell *matHeaderCellDef > Eliminar </th>
+                    <td mat-cell *matCellDef="let element"><button  *ngIf="isAdmin"  (click)="eliminarProfesor(element)">  <span class="material-symbols-outlined">delete</span>  </button></td>
+                  </ng-container>
+    
+                    <!-- Accion Column --> 
+                 <ng-container  matColumnDef="editar">
+                  <th mat-header-cell *matHeaderCellDef > Editar </th>
+                  <td mat-cell *matCellDef="let element"> <button  *ngIf="isAdmin" (click)="editarProfesor(element)"  class="material-symbols-outlined">edit</button>
+                    </td>
+                </ng-container>
+                 
+        
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+           
+        
+        </div>
+    </div>
+

@@ -1,0 +1,4 @@
+  [
+    { "nombre": "React", "alumnos": 50, "cantHoras":50, "dia":"Lunes","hora":"19:00"},
+    { "nombre": "Angular", "alumnos": 60, "cantHoras":60, "dia":"Martes","hora":"19:00"}
+  ]
