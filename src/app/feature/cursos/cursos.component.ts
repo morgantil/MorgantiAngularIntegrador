@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducers';
 import { Curso } from 'src/app/Interfaces/CursoInterface copy';
+import { ServiceService } from 'src/app/shared/service.service';
 
 @Component({
   selector: 'app-cursos',
@@ -19,7 +20,7 @@ export class CursosComponent implements OnInit {
   rol:string = "";
   isAdmin:boolean = false;
 
-  constructor(private fb:FormBuilder, private http:HttpClient, private store : Store<AppState>) { 
+  constructor(private fb:FormBuilder, private http:HttpClient, private store : Store<AppState>,public service:ServiceService) { 
     this.store.select('rol').subscribe((rol)=>{
       this.rol = rol;
     });
@@ -64,7 +65,7 @@ get horaNoValido(){
   return this.formCurso.get('hora').invalid && this.formCurso.get('hora').touched;
 }
 
-agregarCurso(){
+async agregarCurso(){
 
 
   let editar = false;
@@ -89,24 +90,24 @@ agregarCurso(){
     editar=true;
     
     
-    this.http.put<Curso[]>('https://62e31bd53891dd9ba8f450e1.mockapi.io/Cursos/'+element.id,element).subscribe (data =>{
+    let data = await this.service.putCursos(element.id,element);
       this.listaCursos.data=data;
       this.listaCursos.data = listaAuxiliar;
       this.formCurso.reset();
       
-    })
+    
 
    }
  }
 if(editar==false){
   
-  this.http.post<Curso[]>('https://62e31bd53891dd9ba8f450e1.mockapi.io/Cursos',curso).subscribe (data =>{
+  let data = await this.service.postCursos(curso);
     this.listaCursos.data=data;
     listaAuxiliar.push(curso);
     this.listaCursos.data = listaAuxiliar;
     this.formCurso.reset();
     
-  })
+  
   
 }
 }           
@@ -116,22 +117,22 @@ this.formCurso.setValue(element );
 }
 
 
-eliminarCurso(element){
+async eliminarCurso(element){
 let numAborrar=element.id;
-this.http.delete<Curso[]>('https://62e31bd53891dd9ba8f450e1.mockapi.io/Cursos/'+numAborrar).subscribe (data =>{
+let data = await this.service.deleteCursos(numAborrar);
     this.listaCursos.data=data;
     this.getCursos();  
-  })
+  
 
   
 
 }
 
-getCursos(){
-this.http.get<Curso[]>('https://62e31bd53891dd9ba8f450e1.mockapi.io/Cursos').subscribe (data =>{
+async getCursos(){
+let data = await this.service.getCursos();
   this.listaCursos.data=data;
   
-})
+
 }
 
 

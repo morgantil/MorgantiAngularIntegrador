@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducers';
 import { Profesor } from 'src/app/Interfaces/ProfesorInterface';
+import { ServiceService } from 'src/app/shared/service.service';
 
 @Component({
   selector: 'app-profesores',
@@ -20,7 +21,7 @@ export class ProfesoresComponent implements OnInit {
   rol : string;
   
 
-  constructor(private fb:FormBuilder, private http:HttpClient, private store : Store<AppState>) { 
+  constructor(private fb:FormBuilder, private http:HttpClient, private store : Store<AppState>,public service:ServiceService) { 
     this.store.select('rol').subscribe((rol)=>{
       this.rol = rol;
     });
@@ -59,7 +60,7 @@ get cursoNoValido(){
   return this.formProfesor.get('curso').invalid && this.formProfesor.get('curso').touched;
 }
 
-agregarProfesor(){
+async agregarProfesor(){
 
 
   let editar = false;
@@ -83,24 +84,24 @@ agregarProfesor(){
     editar=true;
     
     
-    this.http.put<Profesor[]>('https://62e31bd53891dd9ba8f450e1.mockapi.io/Profesores/'+element.id,element).subscribe (data =>{
+    let data = await this.service.putProfesores(element.id,element);
       this.listaProfesores.data=data;
       this.listaProfesores.data = listaAuxiliar;
       this.formProfesor.reset();
       
-    })
+    
 
    }
  }
 if(editar==false){
   
-  this.http.post<Profesor[]>('https://62e31bd53891dd9ba8f450e1.mockapi.io/Profesores',profesor).subscribe (data =>{
+  let data = await this.service.postProfesores(profesor);
     this.listaProfesores.data=data;
     listaAuxiliar.push(profesor);
     this.listaProfesores.data = listaAuxiliar;
     this.formProfesor.reset();
     
-  })
+  
   
 }
 }           
@@ -111,25 +112,25 @@ this.formProfesor.setValue(element );
 }
 
 
-eliminarProfesor(element){
+async eliminarProfesor(element){
 
 let numAborrar=element.id;
-this.http.delete<Profesor[]>('https://62e31bd53891dd9ba8f450e1.mockapi.io/Profesores/'+numAborrar).subscribe (data =>{
+let data = await this.service.deleteProfesores(numAborrar);
     
     this.listaProfesores.data=data;
     
     this.getProfesores();  
-  })
+  
 
   
 
 }
 
-getProfesores(){
-this.http.get<Profesor[]>('https://62e31bd53891dd9ba8f450e1.mockapi.io/Profesores').subscribe (data =>{
+async getProfesores(){
+  let data = await this.service.getProfesores();
   this.listaProfesores.data=data;
   
-})
+
 }
 
 }

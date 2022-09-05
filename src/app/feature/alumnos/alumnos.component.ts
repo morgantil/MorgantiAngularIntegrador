@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducers';
 import { Alumno } from 'src/app/Interfaces/AlumnoInterface';
+import { ServiceService } from 'src/app/shared/service.service';
 
 
 
@@ -24,7 +25,7 @@ export class AlumnosComponent implements OnInit {
   rol : string;
   
 
-  constructor(private fb:FormBuilder, private http:HttpClient, private store : Store<AppState>) { 
+  constructor(private fb:FormBuilder, private http:HttpClient, private store : Store<AppState>,public service:ServiceService) { 
     this.store.select('rol').subscribe((rol)=>{
       this.rol = rol;
     });
@@ -79,7 +80,7 @@ export class AlumnosComponent implements OnInit {
 
   //Probando como obtener los valores de los forumarios
   
-  agregarAlumno(){
+ async agregarAlumno(){
 
 
     let editar = false;
@@ -103,25 +104,24 @@ export class AlumnosComponent implements OnInit {
       element.nota = alumno.nota
       editar=true;
       
-      
-      this.http.put<Alumno[]>('https://62e31bd53891dd9ba8f450e1.mockapi.io/Alumnos/'+element.id,element).subscribe (data =>{
+      let data = await this.service.putAlumnos(element.id,element);
         this.listaAlumnos.data=data;
         this.listaAlumnos.data = listaAuxiliar;
         this.formEstudiante.reset();
         
-      })
+      
 
      }
    }
   if(editar==false){
     
-    this.http.post<Alumno[]>('https://62e31bd53891dd9ba8f450e1.mockapi.io/Alumnos',alumno).subscribe (data =>{
-      this.listaAlumnos.data=data;
+    let data = await this.service.postAlumnos(alumno);
+      this.listaAlumnos.data = data;
       listaAuxiliar.push(alumno);
       this.listaAlumnos.data = listaAuxiliar;
       this.formEstudiante.reset();
       
-    })
+    
     
   }
   }           
@@ -131,21 +131,23 @@ editarAlumno(element){
 }
 
 
-eliminarAlumno(element){
+async eliminarAlumno(element){
 let numAborrar=element.id;
-this.http.delete<Alumno[]>('https://62e31bd53891dd9ba8f450e1.mockapi.io/Alumnos/'+numAborrar).subscribe (data =>{
+let data = await this.service.deleteAlumnos(numAborrar);
       this.listaAlumnos.data=data;
       this.getAlumnos();  
-    })
+    
 
     
 
 }
 
-getAlumnos(){
-  this.http.get<Alumno[]>('https://62e31bd53891dd9ba8f450e1.mockapi.io/Alumnos').subscribe (data =>{
-    this.listaAlumnos.data=data;
-    
-  })
+
+async getAlumnos(){
+  let data = await this.service.getAlumnos();
+  this.listaAlumnos.data =  data;
+
 }
+
+
 }
