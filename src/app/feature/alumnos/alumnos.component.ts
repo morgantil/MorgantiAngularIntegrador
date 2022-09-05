@@ -17,7 +17,7 @@ import { ServiceService } from 'src/app/shared/service.service';
 export class AlumnosComponent implements OnInit {
 
    
-  displayedColumns: string[] = ['nombre', 'apellido', 'dni','email','nota','eliminar','editar'];
+  displayedColumns: string[] = ['nombre', 'apellido', 'dni','email','nota','curso','eliminar','editar'];
 
   formEstudiante:FormGroup;
   listaAlumnos = new MatTableDataSource<Alumno>();
@@ -52,6 +52,7 @@ export class AlumnosComponent implements OnInit {
       dni  : ['', [ Validators.required,Validators.maxLength(8),Validators.pattern("^[0-9]*$")]],
       email  : ['', [ Validators.required,Validators.email]],
       nota  : ['', [ Validators.required,Validators.pattern("^[0-9]*$")]],
+      curso  : ['' ],
     });
   }
 
@@ -101,7 +102,8 @@ export class AlumnosComponent implements OnInit {
       element.apellido = alumno.apellido;
       element.dni= alumno.dni;
       element.email= alumno.email;
-      element.nota = alumno.nota
+      element.nota = alumno.nota;
+      element.curso = alumno.curso;
       editar=true;
       
       let data = await this.service.putAlumnos(element.id,element);

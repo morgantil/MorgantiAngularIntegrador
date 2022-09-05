@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducers';
+import { Alumno } from 'src/app/Interfaces/AlumnoInterface';
 import { Curso } from 'src/app/Interfaces/CursoInterface copy';
 import { ServiceService } from 'src/app/shared/service.service';
 
@@ -14,7 +15,7 @@ import { ServiceService } from 'src/app/shared/service.service';
 })
 export class CursosComponent implements OnInit {
 
-  displayedColumns: string[] = ['nombre', 'cantHoras', 'alumnos','dia','hora','eliminar','editar'];
+  displayedColumns: string[] = ['nombre', 'cantHoras', 'alumnos','dia','hora','eliminar','editar','alumnosIns'];
   formCurso:FormGroup;
   listaCursos= new MatTableDataSource<Curso>();
   rol:string = "";
@@ -132,6 +133,24 @@ async getCursos(){
 let data = await this.service.getCursos();
   this.listaCursos.data=data;
   
+
+}
+
+async alumnosInscriptos(element){
+  let nombre = element.nombre;
+  let data = await this.service.getAlumnos();
+  let alumInscriptos:any[]=[];
+
+  for (const alumno of data) {
+
+    if(alumno.curso == nombre){
+      alumInscriptos.push(alumno);
+    }
+
+    
+  }
+console.log('LOS ALUMNOS SON',alumInscriptos);
+
 
 }
 

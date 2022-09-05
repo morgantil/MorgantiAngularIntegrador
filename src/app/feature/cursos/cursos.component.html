@@ -143,6 +143,12 @@
                   <td mat-cell *matCellDef="let element"> <button  *ngIf="isAdmin" (click)="editarCurso(element)"  class="material-symbols-outlined">edit</button>
                     </td>
                 </ng-container>
+                   <!-- Editar Alumnos Inscriptos --> 
+                   <ng-container matColumnDef="alumnosIns">
+                    <th mat-header-cell *matHeaderCellDef > Alumnos </th>
+                    <td mat-cell *matCellDef="let element"> <button  *ngIf="isAdmin" (click)="alumnosInscriptos(element)"  class="material-symbols-outlined">chat</button>
+                      </td>
+                  </ng-container>
                  
         
               

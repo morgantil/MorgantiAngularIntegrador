@@ -6,5 +6,6 @@ export class Alumno {
     dni: number;
     email: string;
     nota:number;
+    curso:string;
   
   }

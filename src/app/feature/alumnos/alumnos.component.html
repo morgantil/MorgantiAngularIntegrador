@@ -27,16 +27,29 @@
     <div>
     <mat-label class="label">Email</mat-label>
     <input class="form-control" matInput placeholder="Ingrese un email valido" formControlName="email" [class.is-invalid]="emailNoValido">
-    <small *ngIf="emailNoValido" class="text-danger">Ingrese un dni Valido </small>
+    <small *ngIf="emailNoValido" class="text-danger">Ingrese un email Valido </small>
     
     </div>
     
     <div>
     <mat-label class="label">Nota</mat-label>
     <input class="form-control" matInput placeholder="Ingrese una nota valido" formControlName="nota" [class.is-invalid]="notaNoValido">
-    <small *ngIf="notaNoValido" class="text-danger">Ingrese un dni Valido </small>
+    <small *ngIf="notaNoValido" class="text-danger">Ingrese una Nota Valida </small>
     
     </div>
+    <div>
+      <mat-label class="label">CURSO</mat-label>
+      <mat-form-field appearance="fill">
+        <mat-label>Curso</mat-label>
+        <select matNativeControl required>
+          <option value="angular">ANGULAR</option>
+          <option value="javascript">JAVASCRIPT</option>
+          <option value="react">REACT</option>
+        </select>
+      </mat-form-field>
+      <small *ngIf="notaNoValido" class="text-danger">Ingrese una Nota Valida </small>
+      
+      </div>
     
     <div>
     <div class="botones">
@@ -89,6 +102,11 @@
                     <th mat-header-cell *matHeaderCellDef> Nota </th>
                     <td mat-cell *matCellDef="let element"> {{element.nota | number : '1.2-2'}} </td>
                   </ng-container>
+                   <!-- CURSO Column -->
+                 <ng-container matColumnDef="curso">
+                  <th mat-header-cell *matHeaderCellDef> CURSO </th>
+                  <td mat-cell *matCellDef="let element"> {{element.curso}} </td>
+                </ng-container>
                  
                    <!-- Accion Column -->  
                  <ng-container matColumnDef="eliminar">
