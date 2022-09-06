@@ -86,11 +86,6 @@
 
 <!-- FIN HORA-->
 </form>
-
-
-
-
-  
     </div>
     </div>
     </div>
@@ -127,7 +122,7 @@
 
   <!--tabla chica-->
   <div [ngClass]=" isVisible ? 'mostrar':'ocultar'">
-    <h2>Detalle del alumno</h2>
+    <h2>DETALLE DEL CURSO</h2>
     <table class="table">
       <thead>
         <tr>
@@ -158,7 +153,7 @@
         <!-- DATOS DEL CURSO-->
         
         <ul *ngFor="let alumno of alumnosInscriptos2">
-          <li>{{alumno.nombre}}</li>
+          <li class="mb-5">{{alumno.nombre}},{{alumno.apellido}},{{alumno.dni}}</li>
         </ul>
 
        

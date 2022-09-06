@@ -41,10 +41,8 @@
       <mat-label  class="label">CURSO</mat-label>
      
         <select formControlName="curso"  matNativeControl required>
-          <option value="SINASIGNAR">SIN ASIGNAR</option>
-          <option value="ANGULAR">ANGULAR</option>
-          <option value="JAVASCRIPT">JAVASCRIPT</option>
-          <option value="REACT">REACT</option>
+          <option *ngFor="let curso of cursos"  value={{curso}}>{{curso}}</option>
+         
         </select>
     
       <small *ngIf="notaNoValido" class="text-danger">Ingrese una Nota Valida </small>

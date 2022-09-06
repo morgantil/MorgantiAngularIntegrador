@@ -26,6 +26,7 @@ export class AlumnosComponent implements OnInit {
   detalleCurso:any = [];
   isVisible=false;
   isVisible2=false;
+  cursos:string[]=[];
   isAdmin:boolean = false;
   rol : string;
   
@@ -42,8 +43,8 @@ export class AlumnosComponent implements OnInit {
     this.crearFormulario();
     this.getAlumnos();
     this.isAdmin = this.rol == 'admin';
-  
-
+    this.agregarCurso();
+    console.log("LOS CURSOS",this.cursos);
 
   }
   
@@ -178,6 +179,19 @@ for (const curso of data) {
 console.log(this.detalleCurso,'lala');
 
   
+}
+
+async agregarCurso(){
+
+  let data = await this.service.getCursos();
+
+  for(let curso of data){
+    this.cursos.push(curso.nombre);
+  }
+
+  const cursos = new Set(data);
+
+
 }
 
 
