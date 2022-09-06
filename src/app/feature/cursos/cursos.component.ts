@@ -1,3 +1,4 @@
+import { isFakeMousedownFromScreenReader } from '@angular/cdk/a11y';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -15,11 +16,15 @@ import { ServiceService } from 'src/app/shared/service.service';
 })
 export class CursosComponent implements OnInit {
 
-  displayedColumns: string[] = ['nombre', 'cantHoras', 'alumnos','dia','hora','eliminar','editar','alumnosIns'];
+  displayedColumns: string[] = ['nombre','detalles'];
   formCurso:FormGroup;
   listaCursos= new MatTableDataSource<Curso>();
   rol:string = "";
   isAdmin:boolean = false;
+  listaAlumnos3: any[];
+  isVisible: boolean;
+  alumnosInscriptos2: any[];
+  listaCurso3: any[];
 
   constructor(private fb:FormBuilder, private http:HttpClient, private store : Store<AppState>,public service:ServiceService) { 
     this.store.select('rol').subscribe((rol)=>{
@@ -153,6 +158,29 @@ console.log('LOS ALUMNOS SON',alumInscriptos);
 
 
 }
+
+async mostrarOcultar(element){
+  
+
+  this.listaCurso3=[];
+  this.isVisible=!this.isVisible;
+  this.listaCurso3.push(element);
+  console.log('lista',this.listaCurso3);
+  
+  //DATOS ALUMNOS
+  let data = await this.service.getAlumnos();
+  this.alumnosInscriptos2=[];
+  for(let alumno of data){
+    if(alumno.curso == element.nombre){
+        this.alumnosInscriptos2.push(alumno);
+    }
+  }
+console.log('los alumnos inscriptos son',this.alumnosInscriptos2);
+
+
+  
+    
+  }
 
 
 }
