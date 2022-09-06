@@ -62,7 +62,7 @@
     </div>
     
     </div>
-    
+    <h2>Listado general de alumnos</h2>
     
     <div class="row">
         <div class="col-12">
@@ -102,7 +102,7 @@
         </div>
         <!--tabla chica-->
         <div [ngClass]=" isVisible ? 'mostrar':'ocultar'">
-
+          <h2>Detalle del alumno</h2>
           <table class="table">
             <thead>
               <tr>
@@ -117,6 +117,7 @@
                 
               </tr>
             </thead>
+            
             <tbody>
               <tr *ngFor="let alumno of listaAlumnos3">
 
@@ -129,6 +130,21 @@
                 <td><button *ngIf="isAdmin" (click)="eliminarAlumno(alumno)"><span  class="material-symbols-outlined">delete</span>  </button></td>
                 <td><button *ngIf="isAdmin" (click)="editarAlumno(alumno)"><span  class="material-symbols-outlined">edit</span>  </button></td>
               </tr>
+              <br>
+              <h2>DETALLE CUSO</h2>
+              <!-- DATOS DEL CURSO-->
+            
+
+              <div *ngFor="let curso of detalleCurso">
+
+                <h5> NOMBRE DEL CURSO: {{curso.nombre}}</h5>
+                <h5>DIA DEL CURSO: {{curso.dia}}</h5>
+                <h5>HORARIO DEL CURSO:{{curso.hora}}</h5>
+                <h5>CANT HORAS DEL CURSO:{{curso.cantHoras}</h5>
+               
+              
+                
+              </div>
             
             </tbody>
           </table>

@@ -23,6 +23,7 @@ export class AlumnosComponent implements OnInit {
   listaAlumnos = new MatTableDataSource<Alumno>();
   listaAlumnos2:any = [];
   listaAlumnos3:any = [];
+  detalleCurso:any = [];
   isVisible=false;
   isVisible2=false;
   isAdmin:boolean = false;
@@ -159,11 +160,23 @@ async getAlumnos(){
 }
 async mostrarOcultar(element){
   
- console.log('el seleccionado es',element);
 
 this.listaAlumnos3=[];
 this.isVisible=!this.isVisible;
-  this.listaAlumnos3.push(element);
+this.listaAlumnos3.push(element);
+//DATOS CURSOS
+let data = await this.service.getCursos();
+console.log('el curso es',data);
+this.detalleCurso=[];
+for (const curso of data) {
+  if(curso.nombre == element.curso){
+    
+    this.detalleCurso.push(curso);
+  }
+}
+
+console.log(this.detalleCurso,'lala');
+
   
 }
 

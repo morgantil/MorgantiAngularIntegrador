@@ -65,6 +65,9 @@ export class ServiceService {
    getCursos(): Promise<Curso[]> {
     return this.http.get<Curso[]>( this.api +`/Cursos`).toPromise();
   }
+  getCursosById(nombre:string): Promise<Curso[]> {
+    return this.http.get<Curso[]>( this.api +`/Cursos/${nombre}`).toPromise();
+  }
   
   postCursos(curso:Curso): Promise<Curso[]>{
 
