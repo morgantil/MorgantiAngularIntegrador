@@ -18,6 +18,10 @@ export class ServiceService {
    getAlumnos(): Promise<Alumno[]> {
     return this.http.get<Alumno[]>( this.api +`/Alumnos`).toPromise();
   }
+
+  getAlumnosPorId(id:any): Promise<Alumno[]> {
+    return this.http.get<Alumno[]>( this.api +`/Alumnos/${id}`).toPromise();
+  }
   
   postAlumnos(alumno:Alumno): Promise<Alumno[]>{
 

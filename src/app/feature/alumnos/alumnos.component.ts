@@ -17,10 +17,14 @@ import { ServiceService } from 'src/app/shared/service.service';
 export class AlumnosComponent implements OnInit {
 
    
-  displayedColumns: string[] = ['nombre', 'apellido', 'dni','email','nota','curso','eliminar','editar'];
+  displayedColumns: string[] = ['nombre', 'apellido','detalles'];
 
   formEstudiante:FormGroup;
   listaAlumnos = new MatTableDataSource<Alumno>();
+  listaAlumnos2:any = [];
+  listaAlumnos3:any = [];
+  isVisible=false;
+  isVisible2=false;
   isAdmin:boolean = false;
   rol : string;
   
@@ -95,16 +99,17 @@ export class AlumnosComponent implements OnInit {
     alumno.dni=this.formEstudiante.get('dni').value;
     alumno.email=this.formEstudiante.get('email').value;
     alumno.nota=this.formEstudiante.get('nota').value;
+    alumno.curso=this.formEstudiante.get('curso').value;
   
    for (const element of listaAuxiliar) {
      if(element.dni == alumno.dni){
       element.nombre = alumno.nombre;
       element.apellido = alumno.apellido;
-      element.dni= alumno.dni;
       element.email= alumno.email;
       element.nota = alumno.nota;
       element.curso = alumno.curso;
       editar=true;
+      
       
       let data = await this.service.putAlumnos(element.id,element);
         this.listaAlumnos.data=data;
@@ -116,6 +121,7 @@ export class AlumnosComponent implements OnInit {
      }
    }
   if(editar==false){
+    console.log('alumno',);
     
     let data = await this.service.postAlumnos(alumno);
       this.listaAlumnos.data = data;
@@ -148,7 +154,17 @@ let data = await this.service.deleteAlumnos(numAborrar);
 async getAlumnos(){
   let data = await this.service.getAlumnos();
   this.listaAlumnos.data =  data;
+  this.listaAlumnos2=data;
 
+}
+async mostrarOcultar(element){
+  
+ console.log('el seleccionado es',element);
+
+this.listaAlumnos3=[];
+this.isVisible=!this.isVisible;
+  this.listaAlumnos3.push(element);
+  
 }
 
 
