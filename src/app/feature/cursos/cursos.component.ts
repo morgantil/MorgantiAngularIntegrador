@@ -154,7 +154,7 @@ async alumnosInscriptos(element){
 
     
   }
-console.log('LOS ALUMNOS SON',alumInscriptos);
+
 
 
 }
@@ -164,9 +164,7 @@ async mostrarOcultar(element){
 
   this.listaCurso3=[];
   this.isVisible=!this.isVisible;
-  this.listaCurso3.push(element);
-  console.log('lista',this.listaCurso3);
-  
+  this.listaCurso3.push(element);  
   //DATOS ALUMNOS
   let data = await this.service.getAlumnos();
   this.alumnosInscriptos2=[];
@@ -175,7 +173,7 @@ async mostrarOcultar(element){
         this.alumnosInscriptos2.push(alumno);
     }
   }
-console.log('los alumnos inscriptos son',this.alumnosInscriptos2);
+
 
 
   

@@ -44,7 +44,6 @@ export class AlumnosComponent implements OnInit {
     this.getAlumnos();
     this.isAdmin = this.rol == 'admin';
     this.agregarCurso();
-    console.log("LOS CURSOS",this.cursos);
 
   }
   
@@ -122,9 +121,7 @@ export class AlumnosComponent implements OnInit {
 
      }
    }
-  if(editar==false){
-    console.log('alumno',);
-    
+  if(editar==false){  
     let data = await this.service.postAlumnos(alumno);
       this.listaAlumnos.data = data;
       listaAuxiliar.push(alumno);
@@ -167,7 +164,6 @@ this.isVisible=!this.isVisible;
 this.listaAlumnos3.push(element);
 //DATOS CURSOS
 let data = await this.service.getCursos();
-console.log('el curso es',data);
 this.detalleCurso=[];
 for (const curso of data) {
   if(curso.nombre == element.curso){
@@ -176,7 +172,6 @@ for (const curso of data) {
   }
 }
 
-console.log(this.detalleCurso,'lala');
 
   
 }

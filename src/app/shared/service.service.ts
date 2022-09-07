@@ -34,8 +34,6 @@ export class ServiceService {
   }
   
   deleteAlumnos(id:any){
-    console.log('el nro de id es',id);
-    
     return this.http.delete<Alumno[]>(this.api + `/Alumnos/${id}`).toPromise();
   }
 
